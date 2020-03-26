@@ -62,7 +62,7 @@ pipeline {
 			oc new-app --name books nodejs:8~${APP_GIT_URL} \
 				--build-env npm_config_registry=${NEXUS_SERVER} \
 				--context-dir ${APP_NAME}
-                        oc expose svc/${APP_NAME}
+                        oc expose svc/${APP_NAME} --hostname=dev-books.apps.ocp-eu2.prod.nextcle.com
 		'''
             }
         }
@@ -127,7 +127,7 @@ pipeline {
 		sh '''
 			oc project ${STAGE_PROJECT}
 			oc new-app --name books -i books:stage
-			oc expose svc/${APP_NAME}
+                        oc expose svc/${APP_NAME} --hostname=books.apps.ocp-eu2.prod.nextcle.com
 		'''
             }
         }
